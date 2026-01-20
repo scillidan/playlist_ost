@@ -10,7 +10,7 @@ all:
 
 clean:
 	find . -name "*.pdf" -delete
-	find . -name "*.pdf.jpg" -delete
+	# find . -name "*.pdf.jpg" -delete
 	find . -name "*.mp4" -delete
 
 watch:

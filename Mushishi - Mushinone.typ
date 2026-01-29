@@ -30,9 +30,9 @@
       width: 100%,
       height: 100%,
       grid(
-        columns: 1,  // 一列
-        rows: (1fr, 1fr),  // 两行，各占一半高度
-        gutter: 0.5em,  // 行间距
+        columns: 1,
+        rows: (1fr, 1fr),
+        gutter: 0.5em,
         align(center, box(
           width: 100%,
           height: 100%,

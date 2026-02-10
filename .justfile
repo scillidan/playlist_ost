@@ -18,12 +18,11 @@ pdf-jpg:
 
 mp4:
 	mkdir -p mp4
-	find pdf-jpg -maxdepth 1 -name "*.jpg" -print0 | while IFS= read -r -d '' f; do \
 		basename=$(basename "$f" .pdf.jpg | sed 's/｜/|/g'); \
 		img_file="$f"; \
 		aud_file="${basename}.mp3"; \
 		if [ -f "$aud_file" ]; then \
-			ffmpeg -loop 1 -framerate 1 -i "$img_file" -i "$aud_file" -c:v libx264 -tune stillimage -c:a copy -pix_fmt yuv420p -shortest -y "mp4/${basename}.mp4"; \
+			ffmpeg -nostdin -loop 1 -framerate 1 -i "$img_file" -i "$aud_file" -c:v libx264 -tune stillimage -c:a copy -pix_fmt yuv420p -shortest -y "mp4/${basename}.mp4"; \
 		fi; \
 	done
 
@@ -48,7 +47,7 @@ add basename:
 			"pdf-jpg/{{basename}}.pdf.jpg" 2>/dev/null; \
 	fi
 	@if [ -n "$$audio_file" ] && [ -f "pdf-jpg/{{basename}}.pdf.jpg" ]; then \
-		ffmpeg -loop 1 -framerate 1 -i "pdf-jpg/{{basename}}.pdf.jpg" \
+		ffmpeg -nostdin -loop 1 -framerate 1 -i "pdf-jpg/{{basename}}.pdf.jpg" \
 			-i "$$audio_file" -c:v libx264 -tune stillimage -c:a copy \
 			-pix_fmt yuv420p -shortest -y "mp4/{{basename}}.mp4" 2>/dev/null; \
 	fi
